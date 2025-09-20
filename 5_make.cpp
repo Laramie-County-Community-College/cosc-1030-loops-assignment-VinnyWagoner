@@ -15,7 +15,45 @@ NOTE: It is traditional that American buildings do not have a 13th floor!  The l
 
 INPUT VALIDATION: Remember not to accept numbers less than 0 or greater than 6 for the number of occupied rooms per floor.
 
- 
+ #include <iostream>
+using namespace std;
+
+int main() {
+    const int FLOORS = 16;
+    const int MAX_PER_FLOOR = 6;
+
+    int totalRooms = 0;
+    int totalOccupied = 0;
+
+    for (int floor = 1; floor <= FLOORS; ++floor) {
+        if (floor == 13) { // Skip floor 13
+            continue;
+        }
+
+        int occupied;
+        cout << "Floor " << floor << ": How many apartments are occupied (0-6)? ";
+        cin >> occupied;
+
+        // simple input check
+        while (occupied < 0 || occupied > MAX_PER_FLOOR) {
+            cout << "Invalid. Enter a number 0-6: ";
+            cin >> occupied;
+        }
+
+        totalRooms += MAX_PER_FLOOR;
+        totalOccupied += occupied;
+    }
+
+    int totalUnoccupied = totalRooms - totalOccupied;
+    double percent = (static_cast<double>(totalOccupied) / totalRooms) * 100.0;
+
+    cout << "\nTotal apartments: " << totalRooms << endl;
+    cout << "Occupied: " << totalOccupied << endl;
+    cout << "Unoccupied: " << totalUnoccupied << endl;
+    cout << "Percent occupied: " << percent << "%" << endl;
+
+    return 0;
+}
 
 2.  Random Number Guessing Game
 
@@ -29,5 +67,72 @@ The program should use a do-while loop that repeats until the user guesses the n
 
 The program should also employ a while loop that keeps track of the number of guesses made by the user and, once the user guesses the number correctly, displays the number of guesses the user made.
 
- 
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    srand(time(0)); // seed random
+    int number = (rand() % 100) + 1;
+    int guess;
+    int tries = 0;
+
+    do {
+        cout << "Enter a guess (1-100): ";
+        cin >> guess;
+        tries++;
+
+        if (guess > number) {
+            cout << "Too high, try again.\n";
+        } else if (guess < number) {
+            cout << "Too low, try again.\n";
+        }
+    } while (guess != number);
+
+    cout << "Correct! The number was " << number << ".\n";
+    cout << "You guessed it in " << tries << " tries.\n";
+
+    return 0;
+}
+
 */
+ #include <iostream>
+using namespace std;
+
+int main() {
+    const int FLOORS = 16;
+    const int MAX_PER_FLOOR = 6;
+
+    int totalRooms = 0;
+    int totalOccupied = 0;
+
+    for (int floor = 1; floor <= FLOORS; ++floor) {
+        if (floor == 13) { // Skip floor 13
+            continue;
+        }
+
+        int occupied;
+        cout << "Floor " << floor << ": How many apartments are occupied (0-6)? ";
+        cin >> occupied;
+
+        // simple input check
+        while (occupied < 0 || occupied > MAX_PER_FLOOR) {
+            cout << "Invalid. Enter a number 0-6: ";
+            cin >> occupied;
+        }
+
+        totalRooms += MAX_PER_FLOOR;
+        totalOccupied += occupied;
+    }
+
+    int totalUnoccupied = totalRooms - totalOccupied;
+    double percent = (static_cast<double>(totalOccupied) / totalRooms) * 100.0;
+
+    cout << "\nTotal apartments: " << totalRooms << endl;
+    cout << "Occupied: " << totalOccupied << endl;
+    cout << "Unoccupied: " << totalUnoccupied << endl;
+    cout << "Percent occupied: " << percent << "%" << endl;
+
+    return 0;
+}
